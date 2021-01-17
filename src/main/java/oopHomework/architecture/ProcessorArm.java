@@ -15,6 +15,11 @@ public class ProcessorArm extends Processor {
     }
 
     @Override
+    public String getArchitecture() {
+        return architecture;
+    }
+
+    @Override
     public String dataProcess(String data) {
         return String.format(useProcessorOnArchitecture, architecture, data).toLowerCase(Locale.ROOT);
     }

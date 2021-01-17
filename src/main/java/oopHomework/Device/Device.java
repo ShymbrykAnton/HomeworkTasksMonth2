@@ -8,8 +8,8 @@ import static oopHomework.Utils.Constants.Text.systemInfo;
 
 
 public class Device {
-    Processor processor;
-    Memory memory;
+    public Processor processor;
+    public Memory memory;
 
     public Device(Processor processor, Memory memory) {
         this.processor = processor;
@@ -17,27 +17,27 @@ public class Device {
     }
 
     public void save(String[] data) {
-        for (int count = 0; count < Memory.memoryCell.length && count < data.length; count++) {
-            Memory.memoryCell[count] = data[count];
+        for (int count = 0; count < this.memory.memoryCell.length && count < data.length; count++) {
+            this.memory.memoryCell[count] = data[count];
         }
     }
 
     public String[] readAll() {
-        String[] localMemory = Memory.memoryCell;
-        for (int count = 0; count < Memory.memoryCell.length; count++) {
-            if (Memory.memoryCell[count] != null) {
-                Memory.memoryCell[count] = null;
+        String[] localMemory = this.memory.memoryCell;
+        for (int count = 0; count < this.memory.memoryCell.length; count++) {
+            if (this.memory.memoryCell[count] != null) {
+                this.memory.memoryCell[count] = null;
             }
         }
         return localMemory;
     }
 
     public void dataProcessing() {
-        for (int count = 0; count < Memory.memoryCell.length; count++) {
-            if (Memory.memoryCell[count] != null) {
-                Memory.memoryCell[count] += memoryChanged;
+        for (int count = 0; count < this.memory.memoryCell.length; count++) {
+            if (this.memory.memoryCell[count] != null) {
+                this.memory.memoryCell[count] += memoryChanged;
             } else {
-                Memory.memoryCell[count] = memoryChanged;
+                this.memory.memoryCell[count] = memoryChanged;
             }
         }
     }

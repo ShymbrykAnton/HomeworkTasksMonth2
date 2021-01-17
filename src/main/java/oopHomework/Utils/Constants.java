@@ -11,7 +11,7 @@ public class Constants {
         public final static String processorArchitecture = "Архитектура процессора: %s.\n";
         public final static String emptyMemoryCell = "Ячейка памяти пустая!";
         public final static String memoryChanged = "Changed";
-        public final static String processorInfo = "Частота процессора: %s GHz, кеш: %s Mb, разрядность: %s-bit.";
+        public final static String processorInfo = "Частота процессора: %s GHz, кеш: %s Mb, разрядность: %s-bit, архитектура: %s.";
         public final static String memoryInfo = "Количество свободных ячеек памяти: %s, Процент используемой памяти: %s%%.";
         public final static String systemInfo = "Информация о процессоре:\n%s\nИнформация о памяти:\n%s\n";
     }
@@ -26,7 +26,7 @@ public class Constants {
         public final static Processor intel8086 = new ProcessorX86(0.016, 0, 16);
         public final static Processor intelPentiumPro200 = new ProcessorX86(0.2, 1, 32);
         //Memory
-        public final static String[] memory64 = {"1", "1", null, "1", null, "1", "1", "1"};
+        public final static String[] memory64 = {"1", "1", null, "1", null, null, "1", "1"};
         public final static String[] memory32 = {"1", null, "1", "1"};
         public final static String[] memory16 = {null, "1"};
         public final static Memory memory1 = new Memory(memory64);

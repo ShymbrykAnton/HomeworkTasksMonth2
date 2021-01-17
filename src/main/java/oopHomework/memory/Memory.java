@@ -1,14 +1,22 @@
 package oopHomework.memory;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 import static oopHomework.Utils.Constants.Text.emptyMemoryCell;
 import static oopHomework.Utils.Constants.Text.memoryInfo;
 
 
 public class Memory {
-    public static String[] memoryCell;
+    public String[] memoryCell;
 
     public Memory(String[] memoryCell) {
-        Memory.memoryCell = memoryCell;
+        this.memoryCell = memoryCell;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(memoryCell);
     }
 
     public String readLast() {
@@ -54,7 +62,7 @@ public class Memory {
     public MemoryInfo getMemoryInfo() {
         int availableCells = 0;
         for (String cell : memoryCell) {
-            if (cell != null) {
+            if (cell == null) {
                 availableCells++;
             }
         }

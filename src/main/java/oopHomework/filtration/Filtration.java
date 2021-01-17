@@ -1,6 +1,10 @@
 package oopHomework.filtration;
 
 import oopHomework.Device.Device;
+import oopHomework.processor.Processor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static oopHomework.Utils.Constants.Components.*;
 
@@ -12,5 +16,16 @@ public class Filtration {
             new Device(appleA14Bionic, memory2), new Device(intelCoreI58300H, memory3),
             new Device(qualcommSnapdragon855, memory2), new Device(samsungExynos3110, memory3)};
 
+    public List<Device> filtrateByProcessorParameters(double frequency, double cache, int bitCapacity) {
+        List<Device> list = new ArrayList<>();
+        for (Device device : devices) {
+            if (device.processor.getFrequency() == frequency &&
+                    device.processor.getCache() == cache &&
+                    device.processor.getBitCapacity() == bitCapacity) {
+                list.add(device);
+            }
+        }
+        return list;
+    }
 }
 

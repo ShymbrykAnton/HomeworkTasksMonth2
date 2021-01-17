@@ -14,6 +14,10 @@ public class ProcessorX86 extends Processor {
     public ProcessorX86(double frequency, double cache, int bitCapacity) {
         super(frequency, cache, bitCapacity);
     }
+    @Override
+    public String getArchitecture() {
+        return architecture;
+    }
 
     @Override
     public String dataProcess(String data) {
