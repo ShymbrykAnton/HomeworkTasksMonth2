@@ -4,10 +4,11 @@ import oopHomework.processor.Processor;
 
 import java.util.Locale;
 
+import static oopHomework.Utils.Constants.Text.processorArchitecture;
 import static oopHomework.Utils.Constants.Text.useProcessorOnArchitecture;
 
 public class ProcessorArm extends Processor {
-    final String architecture = "ARM";
+    private final String architecture = "ARM";
 
     public ProcessorArm(double frequency, double cache, int bitCapacity) {
         super(frequency, cache, bitCapacity);

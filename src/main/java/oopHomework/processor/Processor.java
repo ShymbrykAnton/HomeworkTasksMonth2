@@ -1,6 +1,7 @@
 package oopHomework.processor;
 
 import oopHomework.architecture.ProcessorArm;
+import oopHomework.architecture.ProcessorX86;
 
 import static oopHomework.Utils.Constants.Text.processorInfo;
 

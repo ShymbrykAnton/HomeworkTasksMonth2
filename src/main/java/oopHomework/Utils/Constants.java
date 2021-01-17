@@ -8,6 +8,7 @@ import oopHomework.processor.Processor;
 public class Constants {
     public static class Text {
         public final static String useProcessorOnArchitecture = "Используется процессор на архитектуре %s. %s.";
+        public final static String processorArchitecture = "Архитектура процессора: %s.\n";
         public final static String emptyMemoryCell = "Ячейка памяти пустая!";
         public final static String memoryChanged = "Changed";
         public final static String processorInfo = "Частота процессора: %s GHz, кеш: %s Mb, разрядность: %s-bit.";

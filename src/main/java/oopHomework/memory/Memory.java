@@ -36,7 +36,7 @@ public class Memory {
         return false;
     }
 
-    public static class MemoryInfo{
+    public static class MemoryInfo {
         int numberOfAvailableCells;
         double occupiedMemorySpace;
 
@@ -58,7 +58,7 @@ public class Memory {
                 availableCells++;
             }
         }
-        double occupiedMemoryCells = (((memoryCell.length - (double)(availableCells)) / memoryCell.length)*100);
+        double occupiedMemoryCells = (((memoryCell.length - (double) (availableCells)) / memoryCell.length) * 100);
         return new MemoryInfo(availableCells, occupiedMemoryCells);
     }
 }
