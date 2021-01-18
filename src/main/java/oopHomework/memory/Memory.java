@@ -46,6 +46,11 @@ public class Memory {
 
     public static class MemoryInfo {
         int numberOfAvailableCells;
+
+        public double getOccupiedMemorySpace() {
+            return occupiedMemorySpace;
+        }
+
         double occupiedMemorySpace;
 
         public MemoryInfo(int numberOfAvailableSlots, double occupiedMemorySpace) {

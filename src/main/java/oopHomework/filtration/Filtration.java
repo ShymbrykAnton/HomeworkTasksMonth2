@@ -5,8 +5,10 @@ import oopHomework.processor.Processor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static oopHomework.Utils.Constants.Components.*;
+import static oopHomework.Utils.Constants.Text.*;
 
 
 public class Filtration {
@@ -26,6 +28,60 @@ public class Filtration {
             }
         }
         return list;
+    }
+
+    public List<Device> filtrateByArchitecture(String architecture) {
+        List<Device> list = new ArrayList<>();
+        for (Device device : devices) {
+            if (device.processor.getArchitecture().equals(architecture)) {
+                list.add(device);
+            }
+        }
+        return list;
+    }
+
+    public List<Device> filtrateByMemoryVolume(int memoryVolume, String moreLess) {
+        List<Device> list = new ArrayList<>();
+        switch (moreLess.toLowerCase(Locale.ROOT)) {
+            case more:
+                for (Device device : devices) {
+                    if (device.memory.memoryCell.length > memoryVolume) {
+                        list.add(device);
+                    }
+                }
+                return list;
+            case less:
+                for (Device device : devices) {
+                    if (device.memory.memoryCell.length < memoryVolume) {
+                        list.add(device);
+                    }
+                }
+                return list;
+            default:
+                return list;
+        }
+    }
+
+    public List<Device> filtrateByOccupiedMemorySpace(double occupiedMemorySpace, String moreLess) {
+        List<Device> list = new ArrayList<>();
+        switch (moreLess.toLowerCase(Locale.ROOT)) {
+            case more:
+                for (Device device : devices) {
+                    if (device.memory.getMemoryInfo().getOccupiedMemorySpace() > occupiedMemorySpace) {
+                        list.add(device);
+                    }
+                }
+                return list;
+            case less:
+                for (Device device : devices) {
+                    if (device.memory.getMemoryInfo().getOccupiedMemorySpace() < occupiedMemorySpace) {
+                        list.add(device);
+                    }
+                }
+                return list;
+            default:
+                return list;
+        }
     }
 }
 

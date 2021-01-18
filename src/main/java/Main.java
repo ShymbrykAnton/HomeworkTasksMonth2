@@ -12,8 +12,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println(devices[5].getSystemInfo());
         Filtration filtration = new Filtration();
-        List<Device> devices = new ArrayList<>();
-        devices = filtration.filtrateByProcessorParameters(2.99, 8.0, 64);
+        List<Device> devices;
+        devices = filtration.filtrateByOccupiedMemorySpace(25,"More");
         System.out.println(devices.size());
     }
 }
