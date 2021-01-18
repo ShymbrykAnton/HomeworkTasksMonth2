@@ -4,7 +4,6 @@ import oopHomework.processor.Processor;
 
 import java.util.Locale;
 
-import static oopHomework.Utils.Constants.Text.processorArchitecture;
 import static oopHomework.Utils.Constants.Text.useProcessorOnArchitecture;
 
 public class ProcessorArm extends Processor {
