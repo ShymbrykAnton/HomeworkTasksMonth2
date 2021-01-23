@@ -10,7 +10,6 @@ import static oopHomework.Utils.Constants.Text.useProcessorOnArchitecture;
 public class ProcessorX86 extends Processor {
     private final String architecture = "X86";
 
-    //todo показать архитектуру в гет дитейлс процессора, разобратся почему берет последнюю память
     public ProcessorX86(double frequency, double cache, int bitCapacity) {
         super(frequency, cache, bitCapacity);
     }
@@ -21,6 +20,9 @@ public class ProcessorX86 extends Processor {
 
     @Override
     public String dataProcess(String data) {
+        if (data == null) {
+            return String.format(useProcessorOnArchitecture, architecture, "").toUpperCase(Locale.ROOT);
+        }
         return String.format(useProcessorOnArchitecture, architecture, data).toUpperCase(Locale.ROOT);
     }
 

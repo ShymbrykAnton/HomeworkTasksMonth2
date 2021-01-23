@@ -1,7 +1,6 @@
 package oopHomework.architecture;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,41 +10,41 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class ProcessorArmTest {
-    double frequency = 3.4;
-    double cache = 4;
-    int bitCapacity = 64;
-    ProcessorArm processorArm = new ProcessorArm(frequency,cache,bitCapacity);
+    private final double frequency = 53;
+    private final double cache = 4;
+    private final int bitCapacity = 64;
+    private final ProcessorArm processorArm = new ProcessorArm(frequency, cache, bitCapacity);
+    private static final String lowerCaseArchitecture = "используется процессор на архитектуре arm.";
+
     static Stream<Arguments> dataProcessTest_NOMINAL() {
         return Stream.of(
-                arguments("", ""),
-                arguments("Ваших душ безлиственную осень", "Ваших душ безлиственную"),
-                arguments("Летят в меня, как град рыгающей грозы,", "Летят в меня, как град рыгающей"),
-                arguments("aaa dffff ,,,, sssaf, вот тАк", "aaa dffff ,,,, sssaf, вот"),
-                arguments(" 123456789  12345689    12345689", "123456789  12345689   "),
-                arguments("От!Цокота?Копыт.Пыль)Летит.", "")
+                arguments("", lowerCaseArchitecture + " ."),
+                arguments("2 слова", lowerCaseArchitecture + " 2 слова."),
+                arguments("two words", lowerCaseArchitecture + " two words."),
+                arguments(null, lowerCaseArchitecture + " .")
         );
     }
+
     static Stream<Arguments> testDataProcess_NOMINAL() {
         return Stream.of(
-                arguments("", ""),
-                arguments("Ваших душ безлиственную осень", "Ваших душ безлиственную"),
-                arguments("Летят в меня, как град рыгающей грозы,", "Летят в меня, как град рыгающей"),
-                arguments("aaa dffff ,,,, sssaf, вот тАк", "aaa dffff ,,,, sssaf, вот"),
-                arguments(" 123456789  12345689    12345689", "123456789  12345689   "),
-                arguments("От!Цокота?Копыт.Пыль)Летит.", "")
+                arguments(0, lowerCaseArchitecture + " 0."),
+                arguments(-5, lowerCaseArchitecture + " -5."),
+                arguments(Long.MAX_VALUE, lowerCaseArchitecture + " " + Long.MAX_VALUE + "."),
+                arguments(Long.MIN_VALUE, lowerCaseArchitecture + " " + Long.MIN_VALUE + ".")
         );
     }
 
     @ParameterizedTest
-    @MethodSource ("dataProcessTest_NOMINAL")
-    void dataProcessTest() {
-        String actual = processorArm.dataProcess(2635556);
-        String expected = "используется процессор на архитектуре arm. 2635556.";
-        Assertions.assertEquals(expected,actual);
+    @MethodSource("dataProcessTest_NOMINAL")
+    void dataProcessTest(String data, String expected) {
+        String actual = processorArm.dataProcess(data);
+        Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @MethodSource ("testDataProcess_NOMINAL")
-    void testDataProcess() {
+    @MethodSource("testDataProcess_NOMINAL")
+    void testDataProcess(long data, String expected) {
+        String actual = processorArm.dataProcess(data);
+        Assertions.assertEquals(expected, actual);
     }
 }

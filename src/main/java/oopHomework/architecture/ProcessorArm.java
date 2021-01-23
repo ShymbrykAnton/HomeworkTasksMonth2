@@ -20,6 +20,9 @@ public class ProcessorArm extends Processor {
 
     @Override
     public String dataProcess(String data) {
+        if (data == null) {
+            return String.format(useProcessorOnArchitecture, architecture, "").toLowerCase(Locale.ROOT);
+        }
         return String.format(useProcessorOnArchitecture, architecture, data).toLowerCase(Locale.ROOT);
     }
 
