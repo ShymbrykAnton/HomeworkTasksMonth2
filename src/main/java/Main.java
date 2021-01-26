@@ -1,12 +1,9 @@
-import oopHomework.Device.Device;
-import oopHomework.filtration.Filtration;
+import oophomework.device.Device;
+import oophomework.filtration.Filtration;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static oopHomework.filtration.Filtration.devices;
+import static oophomework.filtration.Filtration.devices;
 
 public class Main {
     public static void main(String[] args) {
