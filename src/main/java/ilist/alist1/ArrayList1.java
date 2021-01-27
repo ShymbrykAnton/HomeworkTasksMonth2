@@ -4,28 +4,32 @@ import ilist.IList;
 
 import java.util.Arrays;
 
+import static ilist.utils.Constants.*;
+
 public class ArrayList1 implements IList {
     private int[] array;
-    private final static int DEFAULT_CAPACITY = 10;
     private int size;
     private int capacity = DEFAULT_CAPACITY;
 
     public ArrayList1() {
-        array = new int[DEFAULT_CAPACITY];
+        size = 0;
+        array = new int[capacity];
     }
 
     public ArrayList1(int capacity) {
-        if (capacity < DEFAULT_CAPACITY) {
-            array = new int[DEFAULT_CAPACITY];
+        if (capacity < 1) {
+            throw new IllegalArgumentException("Вместимость коллекции не может быть меньше одного");
         } else {
+            size = 0;
             array = new int[capacity];
             this.capacity = capacity;
         }
     }
 
     public ArrayList1(int[] array) {
+        capacity = array.length;
+        size = capacity;
         this.array = array;
-        this.size = array.length;
     }
 
     @Override
@@ -47,138 +51,94 @@ public class ArrayList1 implements IList {
 
     @Override
     public boolean add(int value) {
-        if (size == array.length) {
-            increaseOrDecreaseArrayCapacity(capacity += 10);
-        }
-        if (size < array.length) {
-            array[size++] = value;
-            return true;
-        }
-        return false;
-    }
-
-    private void increaseOrDecreaseArrayCapacity(int capacity) {
-        this.capacity = capacity;
-        int[] saveArray = new int[array.length];
-        if (capacity == 0) {
-            this.capacity = 10;
-        }
-        for (int count = 0; count < size; count++) {
-            saveArray[count] = array[count];
-        }
-        array = new int[this.capacity];
-        for (int count2 = 0; count2 < saveArray.length; count2++) {
-            array[count2] = saveArray[count2];
-        }
+        increaseArrayCapacityIfRequired();
+        array[size] = value;
+        size++;
+        return true;
     }
 
     @Override
     public boolean add(int index, int value) {
-        isIndexSuitable(index);
-        if (size == array.length) {
-            increaseOrDecreaseArrayCapacity(capacity += 10);
+        if (index < 0 || index > size) {
+            return false;
         }
-        if (size < array.length) {
-            if (size + 1 == capacity) {
-                increaseOrDecreaseArrayCapacity(capacity += 10);
-            }
-            for (int count = size; count > index; count--) {
-                array[count + 1] = array[count];
-            }
-            array[index] = value;
-            size++;
-            return true;
+        increaseArrayCapacityIfRequired();
+        for (int count = size; count > index; count--) {
+            array[count] = array[count - 1];
         }
-        return false;
+        array[index] = value;
+        size++;
+        return true;
     }
 
 
     @Override
     public int remove(int number) {
-        int result = Integer.MIN_VALUE;
-        int savedCount = 0;
-        boolean flag = false;
-        if (!contains(number)) {
-            return result;
+        int index = getIndexByValue(number);
+        if (index == -1) {
+            throw new IllegalArgumentException("Данного числа нет в коллекции");
         }
-        size--;
-        if (size == capacity) {
-            increaseOrDecreaseArrayCapacity(capacity += 10);
-        }
-        for (int count = 0; count < size + 1; count++) {
-            if (array[count] == number) {
-                savedCount = count;
-                result = array[count];
-                array[count] = 0;
-                flag = true;
-            }
-            if (flag && count >= savedCount && count + 1 < array.length) {
-                array[count] = array[count + 1];
-            }
-        }
-        return result;
+        return removeByIndex(index);
     }
 
     @Override
     public int removeByIndex(int index) {
         isIndexSuitable(index);
         int result = array[index];
-        array[index] = 0;
+        if (size == 1) {
+            array = new int[]{};
+        }
         size--;
         for (int count = index; count < size; count++) {
             array[count] = array[count + 1];
-        }
-        if (size == capacity) {
-            increaseOrDecreaseArrayCapacity(capacity -= 10);
         }
         return result;
     }
 
     @Override
     public boolean contains(int value) {
-        for (int count = 0; count < size; count++) {
-            if (array[count] == value) {
-                return true;
-            }
-        }
-        return false;
+        return getIndexByValue(value) >= 0;
     }
 
     @Override
     public boolean set(int index, int value) {
-        isIndexSuitable(index);
+        if (index < 0 || index > size|| Arrays.equals(toArray(), new int[]{})) {
+            return false;
+        }
         array[index] = value;
         return true;
-    }
-
-    private void isIndexSuitable(int index) {
-        if (index < 0 || index > size - 1) {
-            throw new IllegalArgumentException("Индекс не может быть больше количества элементов" +
-                    " или меньше нуля");
-        }
     }
 
     @Override
     public void print() {
         if (size == 0) {
-            System.out.println("[ ]");
+            System.out.println(EMPTY_ARRAY);
             return;
         }
-        StringBuilder result = new StringBuilder("[ ");
+        System.out.println(toString());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder(LEFT_BRACKET);
         for (int count = 0; count < size; count++) {
             if (count != size - 1) {
-                result.append(array[count]).append(", ");
+                result.append(array[count]).append(COMMA_AND_SPACE);
             } else {
-                result.append(array[count]).append(" ]");
+                result.append(array[count]).append(RIGHT_BRACKET);
             }
         }
-        System.out.println(result);
+        return result.toString();
     }
 
     @Override
     public int[] toArray() {
+        if (size == 0) {
+            array = new int[DEFAULT_CAPACITY];
+            return new int[]{};
+        }
         int[] collectionToArray = new int[size];
-        for (int count = 0; count < collectionToArray.length; count++) {
+        for (int count = 0; count < size; count++) {
             collectionToArray[count] = array[count];
         }
         return collectionToArray;
@@ -189,23 +149,51 @@ public class ArrayList1 implements IList {
         if (ints == null) {
             return false;
         }
-        int[] arrayCompare = toArray();
-        if (Arrays.equals(arrayCompare, new int[]{})) {
-            return false;
-        }
-        if (Arrays.equals(arrayCompare, ints)) {
+        if (Arrays.equals(toArray(), ints)) {
             array = new int[DEFAULT_CAPACITY];
             return true;
         }
-        final int[] savedArray = array;
-        for (int count = 0; count < ints.length; count++) {
-            for (int count2 = 0; count2 < size; count2++) {
-                if (ints[count] == array[count2]) {
-                    removeByIndex(count2);
-                }
+        int removeCount = 0;
+        for (int anInt : ints) {
+            int index = getIndexByValue(anInt);
+            if (index != -1) {
+                removeByIndex(index);
+                removeCount++;
             }
         }
-        //remove by index - неправильный. ыейвд эрей такой же как и эррей
-        return !Arrays.equals(savedArray, array);
+        return removeCount != 0;
+    }
+
+    private void increaseArrayCapacityIfRequired() {
+        if (size < array.length - 1) {
+            return;
+        }
+        int[] saveArray = array;
+        int changedCapacity = (int) (capacity * COEFFICIENT);
+        this.capacity = changedCapacity <= capacity ? capacity + 1 : changedCapacity;
+        array = new int[capacity];
+        //capacity -1
+        for (int count = 0; count < size; count++) {
+            array[count] = saveArray[count];
+        }
+    }
+
+    private int getIndexByValue(int value) {
+        for (int count = 0; count < size; count++) {
+            if (array[count] == value) {
+                return count;
+            }
+        }
+        return -1;
+    }
+
+    private void isIndexSuitable(int index) {
+        if (Arrays.equals(toArray(), new int[]{})) {
+            throw new IllegalArgumentException("Пустой массив");
+        }
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Индекс не может быть больше (или равным?) количества элементов" +
+                    " или меньше нуля");
+        }
     }
 }
