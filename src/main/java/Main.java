@@ -1,3 +1,5 @@
+import ilist.IList;
+import ilist.llist1.LinkedList1;
 import oophomework.device.Device;
 import oophomework.filtration.Filtration;
 
@@ -7,10 +9,10 @@ import static oophomework.filtration.Filtration.devices;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(devices[5].getSystemInfo());
-        Filtration filtration = new Filtration();
-        List<Device> devices;
-        devices = filtration.filtrateByOccupiedMemorySpace(25,"More");
-        System.out.println(devices.size());
+//        System.out.println(devices[5].getSystemInfo());
+//        Filtration filtration = new Filtration();
+//        List<Device> devices;
+//        devices = filtration.filtrateByOccupiedMemorySpace(25,"More");
+//        System.out.println(devices.size());
     }
 }

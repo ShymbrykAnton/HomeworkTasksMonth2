@@ -102,7 +102,7 @@ public class ArrayList1 implements IList {
 
     @Override
     public boolean set(int index, int value) {
-        if (index < 0 || index > size|| Arrays.equals(toArray(), new int[]{})) {
+        if (index < 0 || index > size || Arrays.equals(toArray(), new int[]{})) {
             return false;
         }
         array[index] = value;
@@ -172,7 +172,6 @@ public class ArrayList1 implements IList {
         int changedCapacity = (int) (capacity * COEFFICIENT);
         this.capacity = changedCapacity <= capacity ? capacity + 1 : changedCapacity;
         array = new int[capacity];
-        //capacity -1
         for (int count = 0; count < size; count++) {
             array[count] = saveArray[count];
         }
