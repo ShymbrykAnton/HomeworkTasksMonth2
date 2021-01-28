@@ -1,10 +1,10 @@
-package ilist.llist2;
+package ilist.alist1;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LinkedList2Test {
+class ArrayList2Test {
 
     @Test
     void clear() {

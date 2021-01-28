@@ -1,12 +1,3 @@
-import ilist.IList;
-import ilist.llist1.LinkedList1;
-import oophomework.device.Device;
-import oophomework.filtration.Filtration;
-
-import java.util.List;
-
-import static oophomework.filtration.Filtration.devices;
-
 public class Main {
     public static void main(String[] args) {
 //        System.out.println(devices[5].getSystemInfo());

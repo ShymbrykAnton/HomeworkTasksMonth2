@@ -1,4 +1,4 @@
-package ilist.llist1;
+package ilist.impl;
 
 import ilist.IList;
 
@@ -33,7 +33,7 @@ public class LinkedList1 implements IList {
     }
 
     private void clear(Node element) {
-        if (element.next == null) {
+        if (element == null) {
             return;
         }
         clear(element.next);
@@ -88,12 +88,19 @@ public class LinkedList1 implements IList {
 
     @Override
     public boolean add(int index, int value) {
+        if (root == null && index == 0) {
+            root = new Node(value);
+            return true;
+        }
+        if (root == null) {
+            return false;
+        }
         if (index < 0) {
             return false;
         }
         if (index == 0) {
             Node newElement = new Node(value);
-            newElement.next = root.next; // ставим рут некст налл
+            newElement.next = root.next;
             root = newElement;
             return true;
         }
@@ -121,7 +128,7 @@ public class LinkedList1 implements IList {
     @Override
     public int removeByIndex(int index) {
         isIndexSuitable(index);
-        Node ourElement = getNodeByIndex(index,0,root);
+        Node ourElement = getNodeByIndex(index, 0, root);
         int value = ourElement.value;
         remove(value);
         return value;
@@ -139,7 +146,7 @@ public class LinkedList1 implements IList {
         if (element.value == value) {
             return 1;
         }
-       return contains(value, element.next);
+        return contains(value, element.next);
     }
 
     @Override
@@ -181,6 +188,9 @@ public class LinkedList1 implements IList {
 
     @Override
     public int[] toArray() {
+        if (root == null) {
+            return new int[]{};
+        }
         int[] array = new int[size()];
         return toArray(root, 0, array);
     }
@@ -196,6 +206,9 @@ public class LinkedList1 implements IList {
 
     @Override
     public boolean removeAll(int[] array) {
+        if (array == null) {
+            return false;
+        }
         if (Arrays.equals(array, new int[]{})) {
             return true;
         }

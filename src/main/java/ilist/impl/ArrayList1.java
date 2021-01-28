@@ -1,4 +1,4 @@
-package ilist.alist1;
+package ilist.impl;
 
 import ilist.IList;
 
