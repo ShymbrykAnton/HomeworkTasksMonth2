@@ -18,7 +18,7 @@ public class ArrayList1 implements IList {
 
     public ArrayList1(int capacity) {
         if (capacity < 1) {
-            throw new IllegalArgumentException("Вместимость коллекции не может быть меньше одного");
+            throw new IllegalArgumentException(LOW_CAPACITY);
         } else {
             size = 0;
             array = new int[capacity];
@@ -76,7 +76,7 @@ public class ArrayList1 implements IList {
     public int remove(int number) {
         int index = getIndexByValue(number);
         if (index == -1) {
-            throw new IllegalArgumentException("Данного числа нет в коллекции");
+            throw new IllegalArgumentException(NO_NUMBER_IN_COLLECTION);
         }
         return removeByIndex(index);
     }
@@ -86,7 +86,9 @@ public class ArrayList1 implements IList {
         isIndexSuitable(index);
         int result = array[index];
         if (size == 1) {
-            array = new int[]{};
+            size--;
+            array = new int[capacity];
+            return result;
         }
         size--;
         for (int count = index; count < size; count++) {
@@ -188,11 +190,10 @@ public class ArrayList1 implements IList {
 
     private void isIndexSuitable(int index) {
         if (Arrays.equals(toArray(), new int[]{})) {
-            throw new IllegalArgumentException("Пустой массив");
+            throw new IllegalArgumentException(EMPTY_COLLECTION_EXCEPTION);
         }
         if (index < 0 || index > size) {
-            throw new IllegalArgumentException("Индекс не может быть больше (или равным?) количества элементов" +
-                    " или меньше нуля");
+            throw new IllegalArgumentException(INDEX_EXCEPTION);
         }
     }
 }

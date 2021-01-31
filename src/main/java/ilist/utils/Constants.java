@@ -7,4 +7,8 @@ public class Constants {
     public final static String RIGHT_BRACKET = " ]";
     public final static String LEFT_BRACKET = "[ ";
     public final static String EMPTY_ARRAY = "[ ]";
+    public final static String LOW_CAPACITY = "Вместимость коллекции не может быть меньше одного";
+    public final static String NO_NUMBER_IN_COLLECTION = "Данного числа нет в коллекции";
+    public final static String EMPTY_COLLECTION_EXCEPTION = "Коллекция пустая";
+    public final static String INDEX_EXCEPTION = "Индекс не может быть больше или равным количеству элементов или меньше нуля";
 }

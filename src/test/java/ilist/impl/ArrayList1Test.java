@@ -1,8 +1,8 @@
 package ilist.impl;
 
 import ilist.IList;
-import ilist.impl.ArrayList1;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,8 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class ArrayList1Test {
     private static final IList collection0 = new ArrayList1();
     private static final IList collection1 = new ArrayList1();
-
     private static final IList collection9 = new ArrayList1(24);
     private static final IList collection10 = new ArrayList1(48);
-
     private static IList collection12 = new ArrayList1(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
 
     @BeforeEach
@@ -76,7 +74,7 @@ class ArrayList1Test {
     void clearTest(IList collection) {
         collection.clear();
         int actual = collection.size();
-        int expected = collection0.size();
+        int expected = 0;
         Assertions.assertEquals(expected, actual);
     }
 
@@ -125,14 +123,15 @@ class ArrayList1Test {
 
     @ParameterizedTest
     @MethodSource("addTest_Nominal")
-    void addValueTest(int value, IList collection, int[] expected1) {
+    void addValueTest(int value, IList collection, int[] expected) {
         collection.add(value);
-        int[] actual1 = collection.toArray();
-        Assertions.assertArrayEquals(expected1, actual1);
+        int[] actual = collection.toArray();
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     static Stream<Arguments> addValueByIndexTest_Nominal() {
         return Stream.of(
+                arguments(true, 1, collection0, 0, new int[]{1}),
                 arguments(false, 1, collection0, -5, new int[]{}),
                 arguments(false, 5, collection1, 5, new int[]{1}),
                 arguments(true, 15, collection0, 0, new int[]{15}),
@@ -172,7 +171,6 @@ class ArrayList1Test {
         Assertions.assertEquals(expected, actual);
         Assertions.assertArrayEquals(expected1, actual1);
     }
-
 
     static Stream<Arguments> removeByIndexTest_Nominal() {
         return Stream.of(
@@ -235,7 +233,6 @@ class ArrayList1Test {
         collection12.print();
     }
 
-    //
     static Stream<Arguments> toArrayTest_Nominal() {
         return Stream.of(
                 arguments(collection0, new int[]{}),
@@ -272,46 +269,23 @@ class ArrayList1Test {
         Assertions.assertArrayEquals(expected1, actual1);
     }
 
-
-    @Test
-    void getException1Test() throws IllegalArgumentException {
-        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> collection1.get(-15));
-        Assertions.assertNotNull(thrown.getMessage());
+    static Stream<Arguments> ExceptionTest_Nominal() {
+        Executable executable;
+        return Stream.of(
+                arguments(executable = () -> collection1.get(-15)),
+                arguments(executable = () -> collection9.get(10)),
+                arguments(executable = () -> collection0.get(0)),
+                arguments(executable = () -> collection9.remove(15)),
+                arguments(executable = () -> collection0.removeByIndex(0)),
+                arguments(executable = () -> collection12.removeByIndex(-2)),
+                arguments(executable = () -> collection9.removeByIndex(10))
+        );
     }
 
-    @Test
-    void getException2Test() throws IllegalArgumentException {
-        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> collection9.get(10));
-        Assertions.assertNotNull(thrown.getMessage());
-    }
-
-    @Test
-    void getException3Test() throws IllegalArgumentException {
-        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> collection0.get(0));
-        Assertions.assertNotNull(thrown.getMessage());
-    }
-
-    @Test
-    void removeException1Test() throws IllegalArgumentException {
-        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> collection9.remove(15));
-        Assertions.assertNotNull(thrown.getMessage());
-    }
-
-    @Test
-    void removeByIndexException1Test() throws IllegalArgumentException {
-        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> collection9.removeByIndex(10));
-        Assertions.assertNotNull(thrown.getMessage());
-    }
-
-    @Test
-    void removeByIndexException2Test() throws IllegalArgumentException {
-        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> collection12.removeByIndex(-2));
-        Assertions.assertNotNull(thrown.getMessage());
-    }
-
-    @Test
-    void removeByIndexException3Test() throws IllegalArgumentException {
-        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> collection0.removeByIndex(0));
+    @ParameterizedTest
+    @MethodSource("ExceptionTest_Nominal")
+    void getException1Test(Executable executable) throws IllegalArgumentException {
+        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, executable);
         Assertions.assertNotNull(thrown.getMessage());
     }
 }

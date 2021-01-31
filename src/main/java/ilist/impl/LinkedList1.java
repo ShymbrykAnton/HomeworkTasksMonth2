@@ -60,7 +60,7 @@ public class LinkedList1 implements IList {
 
     private Node getNodeByIndex(int index, int currentIndex, Node element) {
         if (element == null) {
-            throw new IndexOutOfBoundsException("По данному индексу не существует элемента");
+            throw new IllegalArgumentException(NO_NUMBER_IN_COLLECTION);
         } else if (index == currentIndex) {
             return element;
         }
@@ -92,16 +92,14 @@ public class LinkedList1 implements IList {
             root = new Node(value);
             return true;
         }
-        if (root == null) {
-            return false;
-        }
-        if (index < 0) {
+        if (root == null || index < 0) {
             return false;
         }
         if (index == 0) {
             Node newElement = new Node(value);
-            newElement.next = root.next;
+            Node saveElement = new Node(root.value);
             root = newElement;
+            root.next = saveElement;
             return true;
         }
         Node previousElement = getNodeByIndex(index - 1, 0, root);
@@ -114,7 +112,7 @@ public class LinkedList1 implements IList {
     @Override
     public int remove(int number) {
         if (root == null) {
-            throw new IndexOutOfBoundsException("Коллекция пуста");
+            throw new IllegalArgumentException(EMPTY_COLLECTION_EXCEPTION);
         }
         if (root.value == number) {
             root = root.next;
@@ -151,12 +149,11 @@ public class LinkedList1 implements IList {
 
     @Override
     public boolean set(int index, int value) {
-        //добавить чтобы гет нод бай индекс отдавал не ошибку
         try {
             Node ourNode = getNodeByIndex(index, 0, root);
             ourNode.value = value;
             return true;
-        } catch (IndexOutOfBoundsException exception) {
+        } catch (IllegalArgumentException exception) {
             return false;
         }
     }
@@ -206,10 +203,7 @@ public class LinkedList1 implements IList {
 
     @Override
     public boolean removeAll(int[] array) {
-        if (array == null) {
-            return false;
-        }
-        if (Arrays.equals(array, new int[]{})) {
+        if (array == null || Arrays.equals(array, new int[]{})) {
             return true;
         }
         if (Arrays.equals(array, toArray())) {
@@ -228,7 +222,7 @@ public class LinkedList1 implements IList {
 
     private Node getPreviousNodeByValue(int value, Node element) {
         if (element.next == null) {
-            throw new IllegalArgumentException("Данный элемент отсутствует в коллекции");
+            throw new IllegalArgumentException(NO_NUMBER_IN_COLLECTION);
         }
         if (element.next.value == value) {
             return element;
@@ -238,7 +232,7 @@ public class LinkedList1 implements IList {
 
     private void isIndexSuitable(int index) {
         if (index < 0) {
-            throw new IndexOutOfBoundsException("Индекс не может быть меньше нуля или больше количества элементов");
+            throw new IllegalArgumentException(INDEX_EXCEPTION);
         }
     }
 }

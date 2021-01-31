@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -141,6 +142,7 @@ class LinkedList1Test {
     static Stream<Arguments> addValueByIndexTest_Nominal() {
         return Stream.of(
                 arguments(false, 1, collection0, -5, new int[]{}),
+                arguments(false, 1, collection9, -5, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}),
                 arguments(true, 15, collection0, 0, new int[]{15}),
                 arguments(true, 5, collection1, 0, new int[]{5, 1}),
                 arguments(true, 2, collection9, 5, new int[]{1, 2, 3, 4, 5, 2, 6, 7, 8, 9}),
@@ -155,7 +157,7 @@ class LinkedList1Test {
         boolean actual = collection.add(index, value);
         int[] actual1 = collection.toArray();
         Assertions.assertEquals(expected, actual);
-//        Assertions.assertArrayEquals(expected1, actual1);
+        Assertions.assertArrayEquals(expected1, actual1);
     }
 
     static Stream<Arguments> removeTest_Nominal() {
@@ -261,7 +263,9 @@ class LinkedList1Test {
 
     static Stream<Arguments> removeAllTest_Nominal() {
         return Stream.of(
-                arguments(false, collection1, null, new int[]{1}),
+                arguments(true, collection1, null, new int[]{1}),
+                arguments(true, collection9, new int[]{}, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}),
+                arguments(true, collection1, new int[]{1}, new int[]{}),
                 arguments(true, collection1, new int[]{1}, new int[]{}),
                 arguments(true, collection9, new int[]{1, 4, 5}, new int[]{2, 3, 6, 7, 8, 9}),
                 arguments(true, collection10, new int[]{9, 123, 2}, new int[]{1, 3, 4, 5, 6, 7, 8, 10}),
@@ -277,5 +281,24 @@ class LinkedList1Test {
         Assertions.assertEquals(expected, actual);
         Assertions.assertArrayEquals(expected1, actual1);
     }
-    //todo просмотреть тесты + тесты на исключения
+
+    static Stream<Arguments> ExceptionTest_Nominal() {
+        Executable executable;
+        return Stream.of(
+                arguments(executable = () -> collection0.removeByIndex(2)),
+                arguments(executable = () -> collection12.removeByIndex(-5)),
+                arguments(executable = () -> collection9.removeByIndex(10)),
+                arguments(executable = () -> collection0.remove(2)),
+                arguments(executable = () -> collection9.remove(23)),
+                arguments(executable = () -> collection9.get(10)),
+                arguments(executable = () -> collection9.get(-5))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("ExceptionTest_Nominal")
+    void getException1Test(Executable executable) throws IllegalArgumentException {
+        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, executable);
+        Assertions.assertNotNull(thrown.getMessage());
+    }
 }
