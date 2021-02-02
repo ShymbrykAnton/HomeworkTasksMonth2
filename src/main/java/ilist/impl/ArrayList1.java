@@ -153,6 +153,7 @@ public class ArrayList1 implements IList {
         }
         if (Arrays.equals(toArray(), ints)) {
             array = new int[DEFAULT_CAPACITY];
+            size = 0;
             return true;
         }
         int removeCount = 0;
