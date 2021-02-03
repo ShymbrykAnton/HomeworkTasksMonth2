@@ -21,10 +21,11 @@ public class BinaryTreeRecursive implements ITree {
         }
     }
 
-    //отрабатывает всего один раз? или при ините если в дереве что-то было то оно затирается?
     @Override
     public void init(int[] ar) {
-
+        for (int i : ar) {
+            add(i);
+        }
     }
 
     @Override
@@ -58,11 +59,10 @@ public class BinaryTreeRecursive implements ITree {
         }
         clear(root);
         root = null;
-        // проверить какой элемент остается
     }
 
     private void clear(Node startElement) {
-        if (startElement.right == null && startElement.left == null) {
+        if (startElement == null) {
             return;
         }
         clear(startElement.left);
@@ -159,17 +159,37 @@ public class BinaryTreeRecursive implements ITree {
 
     @Override
     public int getHeight() {
-        return 0;
+        return getHeight(root);
+    }
+
+    private int getHeight(Node startElement) {
+        if (startElement == null) {
+            return 0;
+        }
+        return 1 + Math.max(getHeight(startElement.left), getHeight(startElement.right));
     }
 
     @Override
     public int nodes() {
-        return 0;
+        return size() - leaves();
     }
+
 
     @Override
     public int leaves() {
-        return 0;
+        return leaves(root, 0);
+    }
+
+    private int leaves(Node startElement, int leaves) {
+        if (startElement == null) {
+            return leaves;
+        }
+        leaves = leaves(startElement.left, leaves);
+        leaves = leaves(startElement.right, leaves);
+        if (startElement.right == null && startElement.left == null) {
+            ++leaves;
+        }
+        return leaves;
     }
 
     @Override
