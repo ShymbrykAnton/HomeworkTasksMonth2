@@ -1,9 +1,10 @@
-package log4j;
+package log4j.exception;
 
-public class FirstException extends Throwable{
+public class FirstException extends Throwable {
     private final int number;
-    FirstException(String message, int number) {
-        super(message+number);
+
+    public FirstException(String message, int number) {
+        super(message + number);
         this.number = number;
     }
 

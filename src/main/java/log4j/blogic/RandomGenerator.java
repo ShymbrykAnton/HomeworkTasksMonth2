@@ -1,5 +1,7 @@
-package log4j;
+package log4j.blogic;
 
+import log4j.exception.FirstException;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import static log4j.util.Constants.*;
@@ -7,10 +9,10 @@ import static log4j.util.Constants.*;
 import java.util.Random;
 
 
-
 public class RandomGenerator {
     Logger logger = Logger.getLogger(RandomGenerator.class);
-    public int generate() throws FirstException {
+
+    public int generate(){
         Random random = new Random();
         int result = random.nextInt(10);
         try {
