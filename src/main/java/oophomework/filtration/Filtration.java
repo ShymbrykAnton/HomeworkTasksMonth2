@@ -11,13 +11,13 @@ import static oophomework.utils.Constants.Text.*;
 
 
 public class Filtration {
-    public static Device[] devices = {new Device(appleA14Bionic, memory1), new Device(samsungExynos3110, memory2),
+    private final Device[] devices = {new Device(appleA14Bionic, memory1), new Device(samsungExynos3110, memory2),
             new Device(qualcommSnapdragon855, memory1), new Device(intelCoreI58300H, memory1),
             new Device(intel8086, memory3), new Device(intelPentiumPro200, memory2),
             new Device(appleA14Bionic, memory2), new Device(intelCoreI58300H, memory3),
             new Device(qualcommSnapdragon855, memory2), new Device(samsungExynos3110, memory3)};
 
-    public List<Device> filtrateByProcessorParameters(double frequency, double cache, int bitCapacity) {
+    public List<Device> filtrateByProcessorParameters(double frequency, double cache, int bitCapacity, Device [] devices) {
         List<Device> list = new ArrayList<>();
         for (Device device : devices) {
             if (device.processor.getFrequency() == frequency &&

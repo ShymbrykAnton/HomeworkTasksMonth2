@@ -54,21 +54,7 @@ public class BinaryTreeRecursive implements ITree {
 
     @Override
     public void clear() {
-        if (root == null) {
-            return;
-        }
-        clear(root);
         root = null;
-    }
-
-    private void clear(Node startElement) {
-        if (startElement == null) {
-            return;
-        }
-        clear(startElement.left);
-        startElement.left = null;
-        clear(startElement.right);
-        startElement.right = null;
     }
 
     @Override
@@ -108,20 +94,6 @@ public class BinaryTreeRecursive implements ITree {
         toArray(startElement.right, list);
         return list.toArray();
     }
-
-//    private List<Node> toList(Node startElement) {
-//        List<Node> result = new ArrayList<>();
-//        if (startElement == null) {
-//            return result;
-//        }
-//        if (startElement.left != null) {
-//            result.addAll(toList(startElement.left));
-//        }
-//        if (startElement.right != null) {
-//            result.addAll(toList(startElement.right));
-//        }
-//        return result;
-//    }
 
     @Override
     public void add(int val) {

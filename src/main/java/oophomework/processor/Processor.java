@@ -5,9 +5,10 @@ import java.util.Objects;
 import static oophomework.utils.Constants.Text.processorInfo;
 
 public abstract class Processor {
-    double frequency;
-    double cache;
-    int bitCapacity;
+    private final double frequency;
+    private final double cache;
+    private final int bitCapacity;
+
 
     public double getFrequency() {
         return frequency;

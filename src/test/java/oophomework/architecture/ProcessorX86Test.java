@@ -48,4 +48,5 @@ class ProcessorX86Test {
         String actual = processorX86.dataProcess(data);
         Assertions.assertEquals(expected, actual);
     }
+    // тест на исключение на налл
 }

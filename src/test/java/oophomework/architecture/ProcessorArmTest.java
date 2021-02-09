@@ -47,4 +47,5 @@ class ProcessorArmTest {
         String actual = processorArm.dataProcess(data);
         Assertions.assertEquals(expected, actual);
     }
+    // тесты на исключение на налл
 }
