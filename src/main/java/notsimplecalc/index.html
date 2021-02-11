@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,500&display=swap"
+          rel="stylesheet">
+    <title>Calculator</title>
+</head>
+<body>
+<div class="container">
+    <div class="container-inner">
+        <div class="calculator">
+            <div class="result">
+                <div class="history">
+                    <p class="history-value" id="history-value"></p>
+                </div>
+                <div class="operatorMain">
+                    <p class="operator-value" id="operator-value"></p>
+                </div>
+                <div class="output">
+                    <p class="output-value" id="result-value"></p>
+                </div>
+            </div>
+            <div class="keyboard">
+                <button class="numbers default-number-btn" id="7">7</button>
+                <button class="numbers default-number-btn" id="8">8</button>
+                <button class="numbers default-number-btn" id="9">9</button>
+                <button class="operator default-btn" id="/">/</button>
+                <button class="numbers default-number-btn" id="4">4</button>
+                <button class="numbers default-number-btn" id="5">5</button>
+                <button class="numbers default-number-btn" id="6">6</button>
+                <button class="operator default-btn" id="*">*</button>
+                <button class="numbers default-number-btn" id="1">1</button>
+                <button class="numbers default-number-btn" id="2">2</button>
+                <button class="numbers default-number-btn" id="3">3</button>
+                <button class="operator default-btn" id="-">-</button>
+                <button class="operator clear" id="clear">C</button>
+                <button class="numbers default-number-btn" id="0" value="0">0</button>
+                <button class="operator dot" id="dot">.</button>
+                <button class="operator default-btn" id="+">+</button>
+                <button class="operator equals" id="equals">=</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="./script.js"></script>
+</html>
