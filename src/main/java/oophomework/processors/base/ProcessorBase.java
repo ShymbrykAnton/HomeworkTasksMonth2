@@ -34,8 +34,12 @@ public abstract class ProcessorBase {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ProcessorBase processor = (ProcessorBase) o;
         return frequency == processor.frequency &&
                 cache == processor.cache &&

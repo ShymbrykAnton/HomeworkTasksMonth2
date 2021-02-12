@@ -11,7 +11,7 @@ import static oophomework.utils.Constants.Text.*;
 
 public class Filtration {
 
-    public List<Device> filtrateByProcessorParameters(double frequency, double cache, int bitCapacity, Device [] devices) {
+    public List<Device> filtrateByProcessorParameters(double frequency, double cache, int bitCapacity, Device[] devices) {
         if (devices == null) {
             throw new IllegalArgumentException("Device не может быть null");
         }
@@ -26,8 +26,8 @@ public class Filtration {
         return list;
     }
 
-    public List<Device> filtrateByArchitecture(String architecture, Device [] devices) {
-        if (devices == null) {
+    public List<Device> filtrateByArchitecture(String architecture, Device[] devices) {
+        if (devices == null || architecture == null) {
             throw new IllegalArgumentException("Device не может быть null");
         }
         List<Device> list = new ArrayList<>();
@@ -39,8 +39,8 @@ public class Filtration {
         return list;
     }
 
-    public List<Device> filtrateByMemoryVolume(int memoryVolume, String moreLess, Device [] devices) {
-        if (devices == null) {
+    public List<Device> filtrateByMemoryVolume(int memoryVolume, String moreLess, Device[] devices) {
+        if (devices == null || moreLess == null) {
             throw new IllegalArgumentException("Device не может быть null");
         }
         List<Device> list = new ArrayList<>();
@@ -59,13 +59,12 @@ public class Filtration {
                     }
                 }
                 return list;
-            default:
-                return list;
         }
+        return list;
     }
 
-    public List<Device> filtrateByOccupiedMemorySpace(double occupiedMemorySpace, String moreLess, Device [] devices) {
-        if (devices == null) {
+    public List<Device> filtrateByOccupiedMemorySpace(double occupiedMemorySpace, String moreLess, Device[] devices) {
+        if (devices == null || moreLess == null) {
             throw new IllegalArgumentException("Device не может быть null");
         }
         List<Device> list = new ArrayList<>();
@@ -84,9 +83,8 @@ public class Filtration {
                     }
                 }
                 return list;
-            default:
-                return list;
         }
+        return list;
     }
 }
 

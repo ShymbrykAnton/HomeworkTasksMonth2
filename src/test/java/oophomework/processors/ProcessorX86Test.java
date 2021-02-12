@@ -27,6 +27,13 @@ class ProcessorX86Test {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("dataProcessTest_NOMINAL")
+    void dataProcessTest(String data, String expected) {
+        String actual = processorX86.dataProcess(data);
+        Assertions.assertEquals(expected, actual);
+    }
+
     static Stream<Arguments> testDataProcess_NOMINAL() {
         return Stream.of(
                 arguments(0, upperCaseArchitecture + " 0."),
@@ -34,13 +41,6 @@ class ProcessorX86Test {
                 arguments(Long.MAX_VALUE, upperCaseArchitecture + " " + Long.MAX_VALUE + "."),
                 arguments(Long.MIN_VALUE, upperCaseArchitecture + " " + Long.MIN_VALUE + ".")
         );
-    }
-
-    @ParameterizedTest
-    @MethodSource("dataProcessTest_NOMINAL")
-    void dataProcessTest(String data, String expected) {
-        String actual = processorX86.dataProcess(data);
-        Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest

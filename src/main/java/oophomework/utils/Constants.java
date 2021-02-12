@@ -6,6 +6,8 @@ import oophomework.processors.ProcessorX86;
 import oophomework.memory.Memory;
 import oophomework.processors.base.ProcessorBase;
 
+import static oophomework.utils.Constants.Components.*;
+
 public class Constants {
     public static class Text {
         public final static String useProcessorOnArchitecture = "Используется процессор на архитектуре %s. %s.";
@@ -37,11 +39,19 @@ public class Constants {
         public static Memory memory3 = new Memory(memory16);
         public static Memory emptyMemory = new Memory(new String[]{null, null, null, null});
         public static Memory fullMemory = new Memory(new String[]{"1", "1", "1"});
+
         //Devices
         public final static Device[] devices = {new Device(appleA14Bionic, memory1), new Device(samsungExynos3110, memory2),
                 new Device(qualcommSnapdragon855, memory1), new Device(intelCoreI58300H, memory1),
                 new Device(intel8086, memory3), new Device(intelPentiumPro200, memory2),
                 new Device(appleA14Bionic, memory2), new Device(intelCoreI58300H, memory3),
                 new Device(qualcommSnapdragon855, memory2), new Device(samsungExynos3110, memory3)};
+    }
+
+    public static void main(String[] args) {
+        System.out.println(memory1.getMemoryInfo());
+        System.out.println(memory2.getMemoryInfo());
+        System.out.println(memory3.getMemoryInfo());
+
     }
 }

@@ -3,6 +3,8 @@ package oophomework.device;
 import oophomework.memory.Memory;
 import oophomework.processors.base.ProcessorBase;
 
+import java.util.Objects;
+
 import static oophomework.utils.Constants.Text.memoryChanged;
 import static oophomework.utils.Constants.Text.systemInfo;
 
@@ -55,5 +57,22 @@ public class Device {
 
     public String getSystemInfo() {
         return String.format(systemInfo, processor.getDetails(), memory.getMemoryInfo().toString());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Device device = (Device) o;
+        return Objects.equals(processor, device.processor) && Objects.equals(memory, device.memory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(processor, memory);
     }
 }
