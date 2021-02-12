@@ -1,16 +1,18 @@
-package oophomework.architecture;
+package oophomework.processors;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static oophomework.utils.Constants.Text.processorInfo;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class ProcessorX86Test {
-    //TODO константы капсом
+    //TODO константы капсом и перенести
     private final double frequency = 53;
     private final double cache = 4;
     private final int bitCapacity = 64;
@@ -21,8 +23,7 @@ class ProcessorX86Test {
         return Stream.of(
                 arguments("", upperCaseArchitecture + " ."),
                 arguments("2 слова", upperCaseArchitecture + " 2 СЛОВА."),
-                arguments("two words", upperCaseArchitecture + " TWO WORDS."),
-                arguments(null, upperCaseArchitecture + " .")
+                arguments("two words", upperCaseArchitecture + " TWO WORDS.")
         );
     }
 
@@ -48,5 +49,16 @@ class ProcessorX86Test {
         String actual = processorX86.dataProcess(data);
         Assertions.assertEquals(expected, actual);
     }
-    // тест на исключение на налл
+
+    @Test
+    void dataProcessStringExceptionTest() {
+        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> processorX86.dataProcess(null));
+        Assertions.assertNotNull(thrown.getMessage());
+    }
+    @Test
+    void getDetailsTest() {
+        String expected = String.format(processorInfo, frequency, cache, bitCapacity, "X86");
+        String actual = processorX86.getDetails();
+        Assertions.assertEquals(expected,actual);
+    }
 }

@@ -1,49 +1,59 @@
 package oophomework.device;
 
 import oophomework.memory.Memory;
-import oophomework.processor.Processor;
+import oophomework.processors.base.ProcessorBase;
 
 import static oophomework.utils.Constants.Text.memoryChanged;
 import static oophomework.utils.Constants.Text.systemInfo;
 
 
 public class Device {
-    public Processor processor;
+    public ProcessorBase processor;
     public Memory memory;
 
-    public Device(Processor processor, Memory memory) {
+    public Device(ProcessorBase processor, Memory memory) {
+        if (processor == null || memory == null) {
+            throw new IllegalArgumentException("Процессор не может быть null");
+        }
         this.processor = processor;
         this.memory = memory;
     }
 
     public void save(String[] data) {
-        for (int count = 0; count < this.memory.memoryCell.length && count < data.length; count++) {
-            this.memory.memoryCell[count] = data[count];
+        if (data == null || data.length > memory.getMemoryCell().length) {
+            throw new IllegalArgumentException("Исходная дата имеет значение налл или отсутствует место в памяти");
+        }
+        String[] memoryCell = memory.getMemoryCell();
+        for (int count = 0; count < memoryCell.length && count < data.length; count++) {
+            memoryCell[count] = data[count];
+            memory.setMemoryCell(memoryCell);
         }
     }
 
     public String[] readAll() {
-        String[] localMemory = this.memory.memoryCell;
-        for (int count = 0; count < this.memory.memoryCell.length; count++) {
-            if (this.memory.memoryCell[count] != null) {
-                this.memory.memoryCell[count] = null;
+       final String[] saveMemoryCell = new String[memory.getMemoryCell().length];
+        String[] memoryCell = memory.getMemoryCell();
+        for (int count = 0; count < memoryCell.length; count++) {
+            saveMemoryCell[count] = memoryCell[count];
+            if (memoryCell[count] != null) {
+                memoryCell[count] = null;
             }
         }
-        return localMemory;
+        memory.setMemoryCell(memoryCell);
+        return saveMemoryCell;
     }
 
     public void dataProcessing() {
-        for (int count = 0; count < this.memory.memoryCell.length; count++) {
-            if (this.memory.memoryCell[count] != null) {
-                this.memory.memoryCell[count] += memoryChanged;
-            } else {
-                this.memory.memoryCell[count] = memoryChanged;
+        String[] memoryCell = memory.getMemoryCell();
+        for (int count = 0; count < memoryCell.length; count++) {
+            if (memoryCell[count] != null) {
+                memoryCell[count] = memoryChanged;
+                memory.setMemoryCell(memoryCell);
             }
         }
     }
 
     public String getSystemInfo() {
-        Memory.MemoryInfo memoryInfo = memory.getMemoryInfo();
-        return String.format(systemInfo, processor.getDetails(), memoryInfo.toString());
+        return String.format(systemInfo, processor.getDetails(), memory.getMemoryInfo().toString());
     }
 }

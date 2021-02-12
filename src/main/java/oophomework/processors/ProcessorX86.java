@@ -1,12 +1,12 @@
-package oophomework.architecture;
+package oophomework.processors;
 
-import oophomework.processor.Processor;
+import oophomework.processors.base.ProcessorBase;
 
 import java.util.Locale;
 
 import static oophomework.utils.Constants.Text.useProcessorOnArchitecture;
 
-public class ProcessorX86 extends Processor {
+public class ProcessorX86 extends ProcessorBase {
     private final String architecture = "X86";
 
     public ProcessorX86(double frequency, double cache, int bitCapacity) {
@@ -24,6 +24,7 @@ public class ProcessorX86 extends Processor {
         }
         return String.format(useProcessorOnArchitecture, architecture, data).toUpperCase(Locale.ROOT);
     }
+
 
     @Override
     public String dataProcess(long data) {

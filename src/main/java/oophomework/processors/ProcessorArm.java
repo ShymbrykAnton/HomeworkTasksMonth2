@@ -1,12 +1,12 @@
-package oophomework.architecture;
+package oophomework.processors;
 
-import oophomework.processor.Processor;
+import oophomework.processors.base.ProcessorBase;
 
 import java.util.Locale;
 
 import static oophomework.utils.Constants.Text.useProcessorOnArchitecture;
 
-public class ProcessorArm extends Processor {
+public class ProcessorArm extends ProcessorBase {
     private final String architecture = "ARM";
 
     public ProcessorArm(double frequency, double cache, int bitCapacity) {

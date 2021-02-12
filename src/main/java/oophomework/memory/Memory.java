@@ -1,15 +1,19 @@
 package oophomework.memory;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static oophomework.utils.Constants.Text.emptyMemoryCell;
 import static oophomework.utils.Constants.Text.memoryInfo;
 
 
 public class Memory {
-    public String[] memoryCell;
+    private String[] memoryCell;
 
     public Memory(String[] memoryCell) {
+        if (memoryCell == null) {
+            throw new IllegalArgumentException("Память не может быть null!");
+        }
         this.memoryCell = memoryCell;
     }
 
@@ -19,16 +23,20 @@ public class Memory {
     }
 
     public String readLast() {
-        if (memoryCell[memoryCell.length - 1] != null) {
-            return memoryCell[memoryCell.length - 1];
-        } else {
-            return emptyMemoryCell;
+        for (int count = memoryCell.length - 1; count > 0; count--) {
+            if (memoryCell[count] != null) {
+                return memoryCell[count];
+            }
         }
+        return emptyMemoryCell;
     }
 
     public String removeLast() {
-        if (memoryCell[memoryCell.length - 1] != null) {
-            memoryCell[memoryCell.length - 1] = null;
+        for (int count = memoryCell.length - 1; count > 0; count--) {
+            if (memoryCell[count] != null) {
+                memoryCell[count] = null;
+                return toString();
+            }
         }
         return emptyMemoryCell;
     }
@@ -43,26 +51,6 @@ public class Memory {
         return false;
     }
 
-    public static class MemoryInfo {
-        int numberOfAvailableCells;
-
-        public double getOccupiedMemorySpace() {
-            return occupiedMemorySpace;
-        }
-
-        double occupiedMemorySpace;
-
-        public MemoryInfo(int numberOfAvailableSlots, double occupiedMemorySpace) {
-            this.numberOfAvailableCells = numberOfAvailableSlots;
-            this.occupiedMemorySpace = occupiedMemorySpace;
-        }
-
-        @Override
-        public String toString() {
-            return String.format(memoryInfo, numberOfAvailableCells, occupiedMemorySpace);
-        }
-    }
-
     public MemoryInfo getMemoryInfo() {
         int availableCells = 0;
         for (String cell : memoryCell) {
@@ -72,5 +60,30 @@ public class Memory {
         }
         double occupiedMemoryCells = (((memoryCell.length - (double) (availableCells)) / memoryCell.length) * 100);
         return new MemoryInfo(availableCells, occupiedMemoryCells);
+    }
+
+    public String[] getMemoryCell() {
+        return memoryCell;
+    }
+
+    public void setMemoryCell(String[] memoryCell) {
+        this.memoryCell = memoryCell;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Memory memory = (Memory) o;
+        return Arrays.equals(memoryCell, memory.memoryCell);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(memoryCell);
     }
 }

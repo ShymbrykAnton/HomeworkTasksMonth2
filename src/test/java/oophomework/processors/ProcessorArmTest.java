@@ -1,12 +1,14 @@
-package oophomework.architecture;
+package oophomework.processors;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static oophomework.utils.Constants.Text.processorInfo;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class ProcessorArmTest {
@@ -16,16 +18,22 @@ class ProcessorArmTest {
     private final ProcessorArm processorArm = new ProcessorArm(frequency, cache, bitCapacity);
     private static final String lowerCaseArchitecture = "используется процессор на архитектуре arm.";
 
-    static Stream<Arguments> dataProcessTest_NOMINAL() {
+    static Stream<Arguments> dataProcessStringTest_NOMINAL() {
         return Stream.of(
                 arguments("", lowerCaseArchitecture + " ."),
                 arguments("2 слова", lowerCaseArchitecture + " 2 слова."),
-                arguments("two words", lowerCaseArchitecture + " two words."),
-                arguments(null, lowerCaseArchitecture + " .")
+                arguments("two words", lowerCaseArchitecture + " two words.")
         );
     }
 
-    static Stream<Arguments> testDataProcess_NOMINAL() {
+    @ParameterizedTest
+    @MethodSource("dataProcessStringTest_NOMINAL")
+    void dataProcessStringTest(String data, String expected) {
+        String actual = processorArm.dataProcess(data);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    static Stream<Arguments> dataProcessLongTest_NOMINAL() {
         return Stream.of(
                 arguments(0, lowerCaseArchitecture + " 0."),
                 arguments(-5, lowerCaseArchitecture + " -5."),
@@ -35,17 +43,22 @@ class ProcessorArmTest {
     }
 
     @ParameterizedTest
-    @MethodSource("dataProcessTest_NOMINAL")
-    void dataProcessTest(String data, String expected) {
+    @MethodSource("dataProcessLongTest_NOMINAL")
+    void dataProcessLongTest(long data, String expected) {
         String actual = processorArm.dataProcess(data);
         Assertions.assertEquals(expected, actual);
     }
 
-    @ParameterizedTest
-    @MethodSource("testDataProcess_NOMINAL")
-    void testDataProcess(long data, String expected) {
-        String actual = processorArm.dataProcess(data);
-        Assertions.assertEquals(expected, actual);
+    @Test
+    void dataProcessStringExceptionTest() {
+        Throwable thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> processorArm.dataProcess(null));
+        Assertions.assertNotNull(thrown.getMessage());
     }
-    // тесты на исключение на налл
+
+    @Test
+    void getDetailsTest() {
+        String expected = String.format(processorInfo, frequency, cache, bitCapacity, "ARM");
+        String actual = processorArm.getDetails();
+        Assertions.assertEquals(expected,actual);
+    }
 }

@@ -6,18 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static oophomework.utils.Constants.Components.*;
 import static oophomework.utils.Constants.Text.*;
 
 
 public class Filtration {
-    private final Device[] devices = {new Device(appleA14Bionic, memory1), new Device(samsungExynos3110, memory2),
-            new Device(qualcommSnapdragon855, memory1), new Device(intelCoreI58300H, memory1),
-            new Device(intel8086, memory3), new Device(intelPentiumPro200, memory2),
-            new Device(appleA14Bionic, memory2), new Device(intelCoreI58300H, memory3),
-            new Device(qualcommSnapdragon855, memory2), new Device(samsungExynos3110, memory3)};
 
     public List<Device> filtrateByProcessorParameters(double frequency, double cache, int bitCapacity, Device [] devices) {
+        if (devices == null) {
+            throw new IllegalArgumentException("Device не может быть null");
+        }
         List<Device> list = new ArrayList<>();
         for (Device device : devices) {
             if (device.processor.getFrequency() == frequency &&
@@ -29,7 +26,10 @@ public class Filtration {
         return list;
     }
 
-    public List<Device> filtrateByArchitecture(String architecture) {
+    public List<Device> filtrateByArchitecture(String architecture, Device [] devices) {
+        if (devices == null) {
+            throw new IllegalArgumentException("Device не может быть null");
+        }
         List<Device> list = new ArrayList<>();
         for (Device device : devices) {
             if (device.processor.getArchitecture().equals(architecture)) {
@@ -39,19 +39,22 @@ public class Filtration {
         return list;
     }
 
-    public List<Device> filtrateByMemoryVolume(int memoryVolume, String moreLess) {
+    public List<Device> filtrateByMemoryVolume(int memoryVolume, String moreLess, Device [] devices) {
+        if (devices == null) {
+            throw new IllegalArgumentException("Device не может быть null");
+        }
         List<Device> list = new ArrayList<>();
         switch (moreLess.toLowerCase(Locale.ROOT)) {
             case more:
                 for (Device device : devices) {
-                    if (device.memory.memoryCell.length > memoryVolume) {
+                    if (device.memory.getMemoryCell().length > memoryVolume) {
                         list.add(device);
                     }
                 }
                 return list;
             case less:
                 for (Device device : devices) {
-                    if (device.memory.memoryCell.length < memoryVolume) {
+                    if (device.memory.getMemoryCell().length < memoryVolume) {
                         list.add(device);
                     }
                 }
@@ -61,7 +64,10 @@ public class Filtration {
         }
     }
 
-    public List<Device> filtrateByOccupiedMemorySpace(double occupiedMemorySpace, String moreLess) {
+    public List<Device> filtrateByOccupiedMemorySpace(double occupiedMemorySpace, String moreLess, Device [] devices) {
+        if (devices == null) {
+            throw new IllegalArgumentException("Device не может быть null");
+        }
         List<Device> list = new ArrayList<>();
         switch (moreLess.toLowerCase(Locale.ROOT)) {
             case more:
