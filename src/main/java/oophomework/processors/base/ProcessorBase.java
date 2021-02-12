@@ -1,14 +1,13 @@
-package oophomework.processor;
+package oophomework.processors.base;
 
 import java.util.Objects;
 
 import static oophomework.utils.Constants.Text.processorInfo;
 
-public abstract class Processor {
+public abstract class ProcessorBase {
     private final double frequency;
     private final double cache;
     private final int bitCapacity;
-
 
     public double getFrequency() {
         return frequency;
@@ -22,7 +21,7 @@ public abstract class Processor {
         return bitCapacity;
     }
 
-    public Processor(double frequency, double cache, int bitCapacity) {
+    public ProcessorBase(double frequency, double cache, int bitCapacity) {
         this.frequency = frequency;
         this.cache = cache;
         this.bitCapacity = bitCapacity;
@@ -37,7 +36,7 @@ public abstract class Processor {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Processor processor = (Processor) o;
+        ProcessorBase processor = (ProcessorBase) o;
         return frequency == processor.frequency &&
                 cache == processor.cache &&
                 bitCapacity == processor.bitCapacity;
