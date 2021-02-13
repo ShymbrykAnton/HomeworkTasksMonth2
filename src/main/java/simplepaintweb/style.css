@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: url(./icons/mountains.png);
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+canvas {
+    height: 600px;
+    width: 600px;
+    border: none;
+    background-color: white;
+}
+
+canvas:hover {
+    cursor: crosshair;
+}
+
+.control-panel {
+    height: 600px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: none;
+    outline: none;
+    background: rgb(1,147,255);
+    background: linear-gradient(180deg, rgba(1,147,255,1) 0%, rgba(8,84,109,1) 100%);
+}
+
+.control-buttons-tab {
+    margin-bottom: 30px;
+    color: green;
+    height: 64px;
+    width: 64px;
+    font-size: inherit;
+    font-weight: 700;
+    transition: color 0.25s;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.control-buttons-tab:hover, #Load:hover {
+    margin-top: 10px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+.control-buttons-tab:active, #Load:active {
+    box-shadow: inset -1px 3px 8px 5px #78b1ff, 2px 5px 16px 0 #b3cffc, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#Brush {
+    background: url(./icons/Brush.png) no-repeat center;
+}
+
+
+#Line {
+    background: url(./icons/Line.png) no-repeat center;
+}
+
+#LineThickness {
+    width: 150px;
+    height: 15px;
+
+}
+
+input[type='range'] {
+    overflow: hidden;
+    width: 80px;
+    -webkit-appearance: none;
+    background-color: #807c7a;
+    border-radius: 40px 40px 40px 40px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    width: 5px;
+    height: 15px;
+    -webkit-appearance: none;
+    cursor: ew-resize;
+    background: #19232f;
+    box-shadow: -80px 0 0 80px #43e5f7;
+}
+
+#Eraser {
+    background: url(./icons/Eraser.png) no-repeat center;
+}
+
+#Save {
+    background: url(./icons/Save.png) no-repeat center;
+}
+
+input {
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+label {
+    color: #041222;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Paint</title>
+</head>
+<body>
+<div class="container">
+    <canvas width="600" height="600" id="mainCanvas"></canvas>
+    <div class="control-panel">
+        <label for="LineThickness" id="LineThicknessLabel">Объём пера</label>
+        <input type="range" min="0" max="100" class="control-buttons-tab" id="LineThickness" value="5">
+        <label for="ColorPanel" id="ColorPanelLabel">Палитра</label>
+        <input type="color" class="control-buttons-tab" id="ColorPanel">
+        <button class="control-buttons-tab" id="Eraser"></button>
+        <button class="control-buttons-tab" id="Save"></button>
+    </div>
+</div>
+</body>
+<script src="./script.js"></script>
+</html>
