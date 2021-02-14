@@ -5,6 +5,7 @@ import trees.impl.BinaryTreeRecursive;
 
 public class Main {
     public static void main(String[] args){
-        PaintView paintView = new PaintView();
+        RandomGenerator randomGenerator = new RandomGenerator();
+        System.out.println(randomGenerator.generate());
     }
 }
