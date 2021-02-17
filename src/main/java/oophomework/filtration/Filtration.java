@@ -13,7 +13,7 @@ public class Filtration {
 
     public List<Device> filtrateByProcessorParameters(double frequency, double cache, int bitCapacity, Device[] devices) {
         if (devices == null) {
-            throw new IllegalArgumentException("Device не может быть null");
+            throw new IllegalArgumentException(NULL_DEVICE);
         }
         List<Device> list = new ArrayList<>();
         for (Device device : devices) {
@@ -28,7 +28,7 @@ public class Filtration {
 
     public List<Device> filtrateByArchitecture(String architecture, Device[] devices) {
         if (devices == null || architecture == null) {
-            throw new IllegalArgumentException("Device не может быть null");
+            throw new IllegalArgumentException(NULL_DEVICE);
         }
         List<Device> list = new ArrayList<>();
         for (Device device : devices) {
@@ -41,7 +41,7 @@ public class Filtration {
 
     public List<Device> filtrateByMemoryVolume(int memoryVolume, String moreLess, Device[] devices) {
         if (devices == null || moreLess == null) {
-            throw new IllegalArgumentException("Device не может быть null");
+            throw new IllegalArgumentException(NULL_DEVICE);
         }
         List<Device> list = new ArrayList<>();
         switch (moreLess.toLowerCase(Locale.ROOT)) {
@@ -65,7 +65,7 @@ public class Filtration {
 
     public List<Device> filtrateByOccupiedMemorySpace(double occupiedMemorySpace, String moreLess, Device[] devices) {
         if (devices == null || moreLess == null) {
-            throw new IllegalArgumentException("Device не может быть null");
+            throw new IllegalArgumentException(NULL_DEVICE);
         }
         List<Device> list = new ArrayList<>();
         switch (moreLess.toLowerCase(Locale.ROOT)) {

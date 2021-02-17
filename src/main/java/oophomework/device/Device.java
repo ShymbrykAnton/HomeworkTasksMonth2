@@ -5,8 +5,7 @@ import oophomework.processors.base.ProcessorBase;
 
 import java.util.Objects;
 
-import static oophomework.utils.Constants.Text.memoryChanged;
-import static oophomework.utils.Constants.Text.systemInfo;
+import static oophomework.utils.Constants.Text.*;
 
 
 public class Device {
@@ -15,7 +14,7 @@ public class Device {
 
     public Device(ProcessorBase processor, Memory memory) {
         if (processor == null || memory == null) {
-            throw new IllegalArgumentException("Процессор не может быть null");
+            throw new IllegalArgumentException(NULL_PROCESSOR);
         }
         this.processor = processor;
         this.memory = memory;
@@ -23,7 +22,7 @@ public class Device {
 
     public void save(String[] data) {
         if (data == null || data.length > memory.getMemoryCell().length) {
-            throw new IllegalArgumentException("Исходная дата имеет значение налл или отсутствует место в памяти");
+            throw new IllegalArgumentException(NULL_DATA_OR_NO_AVAILABLE_SPACE_IN_MEMORY);
         }
         String[] memoryCell = memory.getMemoryCell();
         for (int count = 0; count < memoryCell.length && count < data.length; count++) {
@@ -33,7 +32,7 @@ public class Device {
     }
 
     public String[] readAll() {
-       final String[] saveMemoryCell = new String[memory.getMemoryCell().length];
+        final String[] saveMemoryCell = new String[memory.getMemoryCell().length];
         String[] memoryCell = memory.getMemoryCell();
         for (int count = 0; count < memoryCell.length; count++) {
             saveMemoryCell[count] = memoryCell[count];

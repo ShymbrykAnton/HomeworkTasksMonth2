@@ -21,7 +21,6 @@ public class LinkedList2 implements IList {
             this.next = next;
             this.prev = prev;
         }
-
     }
 
     @Override

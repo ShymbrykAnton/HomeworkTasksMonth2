@@ -44,8 +44,8 @@ canvas:hover {
     flex-wrap: wrap;
     border: none;
     outline: none;
-    background: rgb(1,147,255);
-    background: linear-gradient(180deg, rgba(1,147,255,1) 0%, rgba(8,84,109,1) 100%);
+    background: rgb(1, 147, 255);
+    background: linear-gradient(180deg, rgba(1, 147, 255, 1) 0%, rgba(8, 84, 109, 1) 100%);
 }
 
 .control-buttons-tab {
@@ -64,11 +64,11 @@ canvas:hover {
 .control-buttons-tab:hover, #Load:hover {
     margin-top: 10px;
     transition: 0.3s ease-in-out;
-    box-shadow: 0 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    box-shadow: 0 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
 .control-buttons-tab:active, #Load:active {
-    box-shadow: inset -1px 3px 8px 5px #78b1ff, 2px 5px 16px 0 #b3cffc, 5px 5px 15px 5px rgba(0,0,0,0);
+    box-shadow: inset -1px 3px 8px 5px #78b1ff, 2px 5px 16px 0 #b3cffc, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
 #Brush {

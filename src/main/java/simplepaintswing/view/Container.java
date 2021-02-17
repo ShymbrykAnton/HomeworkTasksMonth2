@@ -7,6 +7,7 @@ public class Container {
     private Color cursorColor = Color.BLACK;
     private String image = "";
     private int thicknessValue = 5;
+
     public int getThicknessValue() {
         return thicknessValue;
     }

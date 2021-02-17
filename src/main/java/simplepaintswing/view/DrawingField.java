@@ -11,6 +11,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static simplepaintswing.utils.constants.Constants.*;
+
 public class DrawingField extends JComponent {
     private final ArrayList<Shape> figures = new ArrayList<>();
     private final ArrayList<Color> colors = new ArrayList<>();
@@ -68,7 +70,7 @@ public class DrawingField extends JComponent {
     }
 
     private boolean isFileExists(String filename) {
-        File tempFile = new File("./"+filename);
+        File tempFile = new File("./" + filename);
         return tempFile.exists();
     }
 
@@ -79,9 +81,9 @@ public class DrawingField extends JComponent {
         String image = container.getImage();
         if (image.contains(".") && isFileExists(image)) {
             String imageFormat = image.substring(image.lastIndexOf('.') + 1);
-            if (imageFormat.equals("png") || imageFormat.equals("gif") || imageFormat.equals("jpeg") ||
-                    imageFormat.equals("jpg") || imageFormat.equals("bmp")) {
-                Image imageImage = new ImageIcon("./"+image).getImage();
+            if (imageFormat.equals(PNG) || imageFormat.equals(GIF) || imageFormat.equals(JPEG) ||
+                    imageFormat.equals(JPG) || imageFormat.equals(BMP)) {
+                Image imageImage = new ImageIcon("./" + image).getImage();
                 graphSettings.drawImage(imageImage, 0, 0, null);
             }
         }

@@ -29,7 +29,7 @@ public abstract class ProcessorBase {
 
     @Override
     public int hashCode() {
-        return Objects.hash(frequency,cache,bitCapacity);
+        return Objects.hash(frequency, cache, bitCapacity);
     }
 
     @Override

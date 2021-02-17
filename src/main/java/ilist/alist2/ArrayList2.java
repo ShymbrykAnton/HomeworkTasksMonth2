@@ -70,7 +70,7 @@ public class ArrayList2<E> implements IGeneric<E> {
 
     public E remove(E value) {
         if (value == null) {
-            throw new IllegalArgumentException("Value is null");
+            throw new IllegalArgumentException(NULL_VALUE);
         }
         int index = getIndexByValue(value);
         if (index == -1) {
@@ -139,7 +139,7 @@ public class ArrayList2<E> implements IGeneric<E> {
         for (int count = 0; count < size; count++) {
             collectionToArray[count] = array[count];
         }
-        return (E[])collectionToArray;
+        return (E[]) collectionToArray;
     }
 
     public boolean removeAll(E[] objects) {
@@ -153,7 +153,7 @@ public class ArrayList2<E> implements IGeneric<E> {
         }
         int removeCount = 0;
         for (Object anObject : objects) {
-            int index = getIndexByValue((E)(anObject));
+            int index = getIndexByValue((E) (anObject));
             if (index != -1) {
                 removeByIndex(index);
                 removeCount++;
@@ -184,7 +184,6 @@ public class ArrayList2<E> implements IGeneric<E> {
         return -1;
     }
 
-    // там где велью сравнения просмотреть
     private void isIndexSuitable(int index) {
         if (Arrays.equals(toArray(), new Object[]{})) {
             throw new IllegalArgumentException(EMPTY_COLLECTION_EXCEPTION);

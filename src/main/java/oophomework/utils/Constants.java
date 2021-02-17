@@ -19,6 +19,15 @@ public class Constants {
         public final static String systemInfo = "Информация о процессоре:\n%s\nИнформация о памяти:\n%s\n";
         public final static String more = "more";
         public final static String less = "less";
+        public final static String NULL_PROCESSOR = "Процессор не может быть null";
+        public final static String NULL_DATA_OR_NO_AVAILABLE_SPACE_IN_MEMORY = "Дата не может быть null или нет места в памяти";
+        public final static String NULL_DEVICE = "Device не может быть null";
+        public final static String NULL_MEMORY = "Memory не может быть null";
+        public final static String NULL_DATA = "Data не может быть null";
+        public final static String ARM = "ARM";
+        public final static String X86 = "X86";
+
+
     }
 
     public static class Components {

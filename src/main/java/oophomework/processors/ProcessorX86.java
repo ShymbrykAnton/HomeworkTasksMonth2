@@ -4,14 +4,15 @@ import oophomework.processors.base.ProcessorBase;
 
 import java.util.Locale;
 
-import static oophomework.utils.Constants.Text.useProcessorOnArchitecture;
+import static oophomework.utils.Constants.Text.*;
 
 public class ProcessorX86 extends ProcessorBase {
-    private final String architecture = "X86";
+    private final String architecture = X86;
 
     public ProcessorX86(double frequency, double cache, int bitCapacity) {
         super(frequency, cache, bitCapacity);
     }
+
     @Override
     public String getArchitecture() {
         return architecture;
@@ -20,7 +21,7 @@ public class ProcessorX86 extends ProcessorBase {
     @Override
     public String dataProcess(String data) {
         if (data == null) {
-            throw new IllegalArgumentException("Информация отсутствует!");
+            throw new IllegalArgumentException(NULL_DATA);
         }
         return String.format(useProcessorOnArchitecture, architecture, data).toUpperCase(Locale.ROOT);
     }

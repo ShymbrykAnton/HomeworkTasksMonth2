@@ -1,7 +1,6 @@
 package ilist;
 
 
-
 public interface IList {
     void clear();
 

@@ -1,10 +1,8 @@
 package oophomework.memory;
 
 import java.util.Arrays;
-import java.util.Objects;
 
-import static oophomework.utils.Constants.Text.emptyMemoryCell;
-import static oophomework.utils.Constants.Text.memoryInfo;
+import static oophomework.utils.Constants.Text.*;
 
 
 public class Memory {
@@ -12,7 +10,7 @@ public class Memory {
 
     public Memory(String[] memoryCell) {
         if (memoryCell == null) {
-            throw new IllegalArgumentException("Память не может быть null!");
+            throw new IllegalArgumentException(NULL_MEMORY);
         }
         this.memoryCell = memoryCell;
     }
